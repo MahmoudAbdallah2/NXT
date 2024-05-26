@@ -1,0 +1,7 @@
+AWS Lambda: Focus on right-sizing memory and execution time
+API Gateway: Choosing the appropriate pricing plan (e.g., using REST APIs for low-traffic scenarios and HTTP APIs for high-traffic or internal use cases) and enabling caching to reduce the number of requests to your backend
+Load Balancers: Selecting the right type (Application Load Balancer for HTTP/HTTPS traffic or Network Load Balancer for high-throughput, low-latency requirements) and trying to apply auto-scaling to handle traffic dynamically.
+AWS Cognito: Optimize costs by managing the number of active users and using the right-tiered pricing plans.
+Amazon S3: Implement lifecycle policies to transition objects to cheaper storage classes and delete unnecessary data, and enable S3 Intelligent-Tiering for automatic cost savings.
+Amazon RDS: Cost Optimiztions can be achieved through right-sizing instances, using Reserved Instances, and taking advantage of read replicas to offload read-heavy traffic.
+CloudWatch: Optimize costs by setting appropriate retention policies for logs and metrics.
