@@ -17,7 +17,7 @@ export class LambdaApigw1Stack extends cdk.Stack {
 
     // Reference an existing VPC
     const vpc = ec2.Vpc.fromLookup(this, 'MyVpc', {
-      vpcId: 'vpc-04f7e4fc41acfc963' // Replace with the ID of your existing VPC
+      vpcId: 'vpc-123456789456' // Replace with the ID of your existing VPC
     });
     
     //Reference subnets
@@ -33,15 +33,6 @@ export class LambdaApigw1Stack extends cdk.Stack {
 
     //Reference Lambda Role
     const lambdaBasicRole = iam.Role.fromRoleArn(this, 'lambdaBasicRole', 'arn:aws:iam::1234567894522:role/Lambda_role_basic');
-
-    //Reference Lambda Cognito Role
-    const lambdaCognitoRole = iam.Role.fromRoleArn(this, 'lambdacognitoRole', 'arn:aws:iam::123456789:role/Lambda-Cognito-Role');
-
-    // Reference SQS Role
-    const lambdaSQSRole = iam.Role.fromRoleArn(this, 'lambdaSQSRole', 'arn:aws:iam::123456789123:role/Lambda-SQS-Role');
-
-    // Reference an existing security group
-    const lambdaSG = ec2.SecurityGroup.fromSecurityGroupId(this, 'lambdaSG', 'sg-1234567895451');
 
     // Create a config set for SES
     const ses_logs = new ses.ConfigurationSet(this, 'ses-logs', {
@@ -60,11 +51,11 @@ export class LambdaApigw1Stack extends cdk.Stack {
     });
   
     // define the TransfloExpressFuelPortalCustomerCreationLambda lambda function
-    const TransfloExpressFuelPortalCustomerCreationLambdaFunction = new lambda.Function(this, 'TransfloExpressFuelPortalCustomerCreationLambda', {
+    const TestLambdaFunction = new lambda.Function(this, 'TestCreationLambda', {
       runtime: lambda.Runtime.DOTNET_6,
-      code: lambda.Code.fromAsset('lambda/TransfloExpressFuelPortalCustomerCreationLambda/publish.zip'), // Path to your .zip file
-      handler: 'TransfloExpress.FuelPortal.CustomerCreationLambda::TransfloExpress.FuelPortal.CustomerCreationLambda.Function::FunctionHandler', // The entry point to your Lambda function
-      functionName: 'TransfloExpressFuelPortalCustomerCreationLambda', // Optional: Provide a name for your Lambda function
+      code: lambda.Code.fromAsset('lambda/TestCreationLambda/TestCreationLambda.zip'), // Path to your .zip file
+      handler: 'TestCreationLambda.Portal.CustomerCreationLambda::TestCreationLambda.Portal.CustomerCreationLambda::FunctionHandler', // The entry point to your Lambda function
+      functionName: 'TestCreationLambda', // Optional: Provide a name for your Lambda function
       vpc,
       vpcSubnets: privateSubnets,
       allowPublicSubnet: true,
@@ -124,7 +115,7 @@ export class LambdaApigw1Stack extends cdk.Stack {
       });
 
       // FuelMobileAppUserPool Cognito Authorizer
-    const FuelMobileAppUserPoolCognitoAuthorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'TestCognitoAuthorizer', {
+    const MobileAppUserPoolCognitoAuthorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'TestCognitoAuthorizer', {
         cognitoUserPools: [TestUserPool]
       });
 
